@@ -1,0 +1,2 @@
+# investment
+Odoo Investment Package
