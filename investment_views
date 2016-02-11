@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<openerp>
+  <data>
+ <!--Application Form View-->    
+      <record id="view_application_form" model="ir.ui.view">        
+          <field name="name">application.form.view</field>        
+          <field name="model">application_card</field>        
+          <field name="arch" type="xml">
+          <form string="Application Card" version="7.0">                
+          <!--This creates a cascade view for the lease header showing the status transition-->
+          <header><!--
+            <button name = "action_send_approval_request" type = "object" string = "Send Approval Request" />
+            <button name = "action_cancel_approval_request" type = "object" string = "Cancel Approval Request" />
+            <button name = "action_cancel_approval_request" type = "object" string = "Plot Allocation" />
+            <button name ="lease_print" string ="Print" type ="object"  class ="oe_highlight" groups ="base.group_user"/>-->       
+          </header>
+          <sheet>
+            <group col="2">
+              <group string="Member Information">             
+                <field name="name"/> 
+                <field name="staffNo"/>            
+                <field name="clientCode"/> 
+                <field name="clientName" /> 
+                <field name="idno"/>
+                <field name="appDate"/>
+                <field name="ptype"/> 
+                <field name="desc"/> 
+                <field name="installment"/>            
+                <field name="intrst"/> 
+                <field name="prodCurCode" /> 
+                <field name="reqAmount"/>
+                <field name="appAmount"/>
+                <field name="loanPurpose"/> 
+                <field name="remark"/> 
+                <field name="repMode"/>            
+                <field name="repay"/> 
+                <field name="prdStatus" />                  
+              </group>
+                <group string="Other Details">
+                <field name="batch"/>
+                <field name="captured"/>
+                <field name="topUpAmt"/> 
+                <field name="repFreq"/> 
+                <field name="mode"/> 
+                <field name="prdDisDate" /> 
+                <field name="cheque" />
+                <field name="repStrtDate"/>
+                <field name="externalEft" /> 
+                <field name="posted" />
+                <field name="rversed"/>
+                <field name="outstandingBal"/> 
+              </group>
+            </group>            
+          </sheet>                                       
+          </form>        
+          </field>    
+      </record>
+    <!--END ROBERT -->
+   <!--Forms section -->
+      <record model = "ir.ui.view" id = "general_setup_form_view">  
+        <field name = "name">general.setup.form.view</field>
+        <field name = "model">general_setup</field>
+        <field name = "arch" type = "xml">
+          <form string = "General Setup">
+          	<sheet>
+          		<group>
+          			<group string = 'General'>
+          				<field name  = 'stampDuty' />
+          				<field name  = 'surveyFeeCharge' />
+          				<field name  = 'fencing' />
+          				<field name  = 'roadWork' />
+          				<field name  = 'legalFee' />
+          				<field name  = 'committeeSittingTravel' />
+          				<field name  = 'agencyFee' />
+          				<field name  = 'valuation' />
+          				<field name  = 'agencyInterest' />
+          				<field name  = 'costNo' />
+          				<field name  = 'description' />
+          				<field name  = 'vatPercent' />
+          				<field name  = 'attractMargin' />
+          				<field name  = 'titleDeeds' />
+          				<field name  = 'boardAllowance' />
+          			</group>	
+          		</group>
+          	</sheet>
+          </form>
+        </field>  
+    </record> 
+    <!--Task Setup-->
+    <record model = "ir.ui.view" id = "task_setup_form_view">  
+        <field name = "name">task.setup.form.view</field>
+        <field name = "model">task_setup</field>
+        <field name = "arch" type = "xml">
+          <form string = "Task Setup">
+          	<sheet>
+          		<group>
+          			<group string = 'General'>
+          				<field name  = 'name' />
+          				<field name  = 'description' />
+          				<field name  = 'vatable' />
+          				<field name  = 'attaractMargin' />          				
+          			</group>	
+          		</group>
+          	</sheet>
+          </form>
+        </field>  
+    </record> 
+    <!--Plot Form View-->    
+    <record id="view_plot_form" model="ir.ui.view">        
+        <field name="name">plot.form.view</field>        
+        <field name="model">project_purchase_card</field>        
+        <field name="arch" type="xml">
+        <form string="Plot Card" version="7.0">                
+        <!--This creates a cascade view for the lease header showing the status transition-->
+        <header><!--
+          <button name = "action_send_approval_request" type = "object" string = "Send Approval Request" />
+          <button name = "action_cancel_approval_request" type = "object" string = "Cancel Approval Request" />
+          <button name = "action_cancel_approval_request" type = "object" string = "Re-Classify" />
+          <button name ="lease_print" string ="Print" type ="object"  class ="oe_highlight" groups ="base.group_user"/>-->          
+        </header>
+        <sheet>
+          <group col="2">
+            <group string="Plot Information"> 
+                <field name="plotNo"/> 
+                <field name="plotDesc"/>            
+                <field name="name"/> 
+                <field name="projectName" /> 
+                <field name="description"/>
+                <field name="titleDeedNo"/>
+                <field name="totalAcreage"/>                
+            </group>
+                <group string="Other Details">            
+                <field name="usefulAcreage"/> 
+                <field name="vendorNo"/> 
+                <field name="vendorName" /> 
+                <field name="allocationToRoads" />
+                <field name="createdBy"/>                   
+            </group>
+          </group>          
+          <notebook colspan="4">
+            <page string="Plot Line" >
+              <field name="inv_purch_line">
+                <tree string='Plot Lines' editable="bottom">
+                  <field name= 'description'/>
+                  <field name= 'titleDeedNo' />
+                  <field name= 'totalAcreage'/>
+                  <field name= 'allocationToRoads'/>
+                  <field name= 'usefulAcreage'/>              
+              </tree>
+              </field>
+            </page>
+            <page string="Costing">
+              <field name="inv_purch_cost">
+                <tree string='Plot Costing' editable="bottom">
+                  <field name= 'description'/>
+                  <field name= 'initialCost'/>
+                  <field name= 'totalCost' />
+                  <field name= 'profitMargin'/>
+                  <field name= 'vat'/>
+                  <field name= 'totalMarginCost'/>
+                  <field name= 'allocationNo'/>
+                  <field name= 'feeCharged'/>
+                  <field name= 'attaractMargin'/>
+                  <field name= 'nonLandCost'/>
+                  <field name= 'totalLandCost'/>              
+              </tree>
+              </field>
+            </page>
+          </notebook>           
+        </sheet>                                       
+        </form>        
+        </field>    
+    </record>
+
+    <!--Member -->
+    <record model = 'ir.ui.view' id = 'member_form_view'>
+            <field name = 'name'>investment.member.form.view</field>
+            <field name = 'model'>investment_member</field>
+            <field name = 'arch' type = 'xml'>
+              <form string = "Member Card">
+                <header>                  
+                </header>
+                <sheet>
+                  <field name = 'image' widget="image" class="oe_left oe_avatar"/>
+                  <group>
+                    <group>
+                      <field name  = 'no' />
+                      <field name  = 'name' />
+                      <field name  = 'registration_date' />                 
+                      <field name  = 'date_of_birth' /> 
+                    </group>
+                    <group string = 'Important'>
+                        <field name  = 'idno' />
+                        <field name  = 'passportno' />
+                        <field name = 'member_pin' />
+                        <field name  = 'marital_status' />
+                        <field name  = 'gender' />
+                        <field name  = 'occupation' />
+                        <field name  = 'designation' />
+                        <field name = 'member_account_status'/>
+                    </group>
+                    <group string = 'Additional'>
+                        <field name = 'recruited_by' />
+                        <field name = 'approved_by' />
+                        <field name = 'bank_account_no' />
+                        <field name = 'bank_name' />
+                    </group>
+                 </group>
+                <notebook>
+                <page string = 'Communication'>
+                  <group colspan = '2'>
+                    <group>
+                      <field name  = 'mobile_no' />
+                      <field name  = 'phone_no' />
+                      <field name  = 'email' />
+                      <field name  = 'contact_person' />
+                      <field name  = 'contact_person_phone_no' />
+                      <field name  = 'contact_person_relation' />
+                    </group>
+                    <group>
+                      <field name  = 'home_address' />
+                      <field name  = 'location' />
+                      <field name  = 'sublocation' />
+                      <field name  = 'district' />
+                    </group>
+                  </group>
+                </page>
+                <page string = 'Share and Dividend Information'>
+                      <group colspan = '2'>
+                        <group>
+                          <field name = 'monthly_contribution'/>
+                          <field name = 'dividend_amount'/>
+                          <field name = 'current_loan' />
+                          <field name = 'current_savings' />
+                        </group>
+                        <group>    
+                          <field name = 'current_shares' />
+                          <field name = 'current_deposits' />
+                          <field name = 'principal_balance' />
+                          <field name = 'principal_repayment'/>
+                        </group>
+                      </group>
+                </page>
+                <page string = 'Next of Kin Details'>
+                  <field name = 'next_of_kin_id_member'>
+                    <tree editable="bottom">
+                      <field name = 'name' />
+                      <field name = 'relationship' />
+                      <field name = 'beneficiary' />
+                      <field name = 'telephone' />
+                      <field name = 'address' />
+                      <field name = 'fax' />
+                      <field name = 'email' />
+                      <field name = 'percentage_allocation' />
+                      <field name = 'creation_date' />
+                    </tree>
+                  </field>
+                </page>
+              </notebook>
+                </sheet>
+              </form>
+            </field>
+          </record>  
+    <!--tree ; General Setup-->
+  	  <record model = "ir.ui.view" id = "general_setup_tree_view">
+  	  	<field name = "name">general.setup.tree</field>
+  	  	<field name = "model">general_setup</field>
+  	  	<field name = "arch" type = "xml">
+  	  		<tree string = "General Setup">
+  				<field name  = 'stampDuty' />
+  				<field name  = 'roadWork' />
+  				<field name  = 'roadWork' />
+  				<field name  = 'vatPercent' />  				
+  	  		</tree>
+  	  	</field>
+  	  </record>
+  	  <!--Tree ; Task Setup-->
+  	  <record model = "ir.ui.view" id = "task_setup_tree_view">
+  	  	<field name = "name">task.setup.tree</field>
+  	  	<field name = "model">task_setup</field>
+  	  	<field name = "arch" type = "xml">
+  	  		<tree string = "Task Setup">
+  				<field name  = 'name' />
+  				<field name  = 'description' />
+  				<field name  = 'vatable' />
+  				<field name  = 'attaractMargin' />  				
+  	  		</tree>
+  	  	</field>
+  	  </record> 
+      <!--Plot Tree View-->
+      <record id="view_plot_tree" model="ir.ui.view">  
+        <field name="name">plot.tree</field>        
+        <field name="model">project_purchase_card</field> 
+        <field name="arch" type="xml">
+         <!-- this will be our title of list/tree view -->            
+        <tree string="Plot Details">               
+         <!-- these will automatically map table headers for our list view, so we’ll select out column names of our model here -->
+            <field name="plotNo"/>  
+            <field name="plotDesc"/> 
+            <field name="vendorNo"/> 
+            <field name="vendorName"/> 
+            <field name="totalAcreage"/> 
+            <field name="usefulAcreage"/> 
+            <field name="createdBy"/>           
+        </tree>       
+        </field>
+      </record> 
+      <!--tree ; Member -->
+      <record model = 'ir.ui.view' id = 'member_tree_view'>
+            <field name = 'name'>investment.member.tree.view</field>
+            <field name = 'model'>investment_member</field>
+            <field name = 'arch' type = 'xml'>
+              <tree string = 'Investment Members'>
+                <field name = 'no'/>
+                <field name = 'name'/>
+                <field name = 'address'/>
+                <field name = 'phone_no'/>
+                <field name = 'mobile_no'/>
+                <field name = 'email'/>
+              </tree>
+            </field>
+          </record>
+<!--start creating the Investment menus here-->
+<!--start creating the Investment menus here-->
+  
+<menuitem name ="Investment" id = "investment_main_menu" />
+
+<menuitem name = "System Setup" id = "general_setup_main_menu" parent = "investment_main_menu"/>
+
+<!--menu ; General setup -->
+<menuitem name = "General Setup" id = "GSetup_list" parent = "general_setup_main_menu" action = "general_setup_list_action"/> 
+
+		<!--action ; General Setup -->
+  	  <record model = "ir.actions.act_window" id = "general_setup_list_action">
+	      <field name ="name">General setup</field>
+	      <field name ="res_model">general_setup</field>
+	      <field name ="view_type">form</field>
+	      <field name ="view-mode">tree,form</field>
+	      <field name ="help" type ="html">
+	        <p class ="oe_view_nocontent_create">Create</p>
+	      </field>
+  	  </record>
+      <!--menu ; Task setup -->       
+<menuitem name = "Task Setup" id = "TSetup_list" parent = "general_setup_main_menu" action = "task_setup_list_action"/> 
+ 
+  	  <!-- action ; Task setup -->
+  	  <record model = "ir.actions.act_window" id = "task_setup_list_action">
+	      <field name ="name">Task setup</field>
+	      <field name ="res_model">task_setup</field>
+	      <field name ="view_type">form</field>
+	      <field name ="view-mode">tree,form</field>
+	      <field name ="help" type ="html">
+	        <p class ="oe_view_nocontent_create">Creat</p>
+	      </field>
+  	  </record>
+<menuitem id="members_root" name="Member Management"  parent="investment_main_menu" sequence="40" />
+       <!--menu ; investment -->       
+<menuitem name = "Investment Members" id = "IMember_list" parent = "members_root" action = "Invest_member_list_action"/> 
+      <!-- action ; Investment Members-->
+      <record model = "ir.actions.act_window" id = "Invest_member_list_action">
+        <field name ="name">Investment Member</field>
+        <field name ="res_model">investment_member</field>
+        <field name ="view_type">form</field>
+        <field name ="view-mode">tree,form</field>
+        <field name ="help" type ="html">
+          <p class ="oe_view_nocontent_create">Create</p>
+        </field>
+      </record>
+<menuitem id="menu_plot_root" name="Projects Management"  parent="investment_main_menu" sequence="1" />
+<!-- Sub Menu Related Info -->     
+<!-- Action Menu Related Info --> 
+<menuitem action="action_investment"  id="menu_action_investment" parent="menu_plot_root" sequence="20" />
+      <!--Action Plot List-->
+      <record id="action_investment" model="ir.actions.act_window">       
+        <field name="name">Investment Projects</field>       
+        <field name="res_model">project_purchase_card</field>    
+        <field name="view_type">form</field>        
+        <field name="view_mode">tree,form</field> 
+        <field name="context">{}</field>     
+        <field name="help">Create new Plot</field> 
+      </record> 
+<!-- Action Menu Related Info --> 
+<menuitem action="action_application_Card" id="menu_action_application_Card" parent="menu_plot_root" sequence="20" />
+      <!--Action Application List-->
+      <record id="action_application_Card" model="ir.actions.act_window">       
+        <field name="name">Investment Application</field>       
+        <field name="res_model">application_card</field>    
+        <field name="view_type">form</field>        
+        <field name="view_mode">tree,form</field> 
+        <field name="context">{}</field>     
+        <field name="help">Create new Application</field> 
+      </record> 
+
+  </data>
+</openerp>   
+      
