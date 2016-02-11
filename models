@@ -1,0 +1,227 @@
+from openerp import models, fields, api
+#general setup
+
+class inv_general_setup(models.Model): 
+    _name="general_setup"
+    _description="General Setup"
+           
+    stampDuty = fields.Float(string ='Stamp Duty')
+    fencing=fields.Float(string ='Fencing',size=128, required=False)
+    surveyFeeCharge=fields.Float(string ='Survay Fee Charge', required=True)
+    roadWork=fields.Float(string ='Road work')
+    legalFee=fields.Float(string ='Legal Fee')
+    committeeSittingTravel=fields.Char(string ='Committe sitting And Travel')
+    agencyFee=fields.Float( string ='Agency Fee')
+    valuation=fields.Float(string ='Valuation')
+    agencyInterest=fields.Float(string ='Agency Interest')
+    costNo=fields.Char(string ='Cost No')
+    description=fields.Char(string = "Description")
+    vatPercent=fields.Float(string ='VAT %')
+    attractMargin=fields.Boolean(string ='Attract Margin', store =True)
+    titleDeeds=fields.Char(string ='Title Deed')
+    boardAllowance=fields.Char(string ='Board Allowance')
+    #end of general setup
+
+    #Task Setup
+class inv_task_setup(models.Model):
+    _name="task_setup"
+    _description="Task Setup"
+           
+    name = fields.Char(string ='Code')
+    description=fields.Char(string ='Description',size=128, required=False)
+    vatable=fields.Float(string ='Vatable', required=True)
+    attaractMargin=fields.Boolean(string ='Attract Margin')
+    #end of Task setup
+
+     #project land purchase Card
+class inv_project_puchase_card(models.Model):
+    _name="project_purchase_card"
+    _description="Project Card"
+           
+    name = fields.Char(string ='Project No.')
+    projectName=fields.Char(string ='Project Name')
+    description=fields.Char(string ='Description')
+    titleDeedNo=fields.Char(string ='Title Deed No')
+    vendorNo   =fields.Char(string ='Vendor No')
+    vendorName=fields.Char(string ='Vendor Name')
+    totalAcreage=fields.Float(string ='Total Acreage')
+    allocationToRoads=fields.Char(string ='Allocation To Roads/ Amenities')
+    usefulAcreage=fields.Float('Usefull Acreage')
+    createdBy=fields.Char(string ='Created By')
+    date=fields.Date(string ='Description',default = fields.Date.today)
+    plotNo=fields.Char(string ='Plot No')
+    plotDesc=fields.Char(string ='Plot Description')
+    posted=fields.Boolean(string ='Posted')
+    inv_purch_line=fields.One2many('project_purchase_lines','name', string = "Plot Line Details")
+    inv_purch_cost=fields.One2many('project_purchase_cost','name', string ="Plot Costing")
+    #end of project land purchase card
+
+    #project land purchase lines
+class inv_project_puchase_lines(models.Model):
+    _name="project_purchase_lines"
+    _description="Project lines"
+           
+    name = fields.Char(string ='Project No.')
+    projectName=fields.Char(string ='Project Name')
+    description=fields.Char(string ='Description')
+    titleDeedNo=fields.Char(string ='Title Deed No')
+    vendorNo   =fields.Char(string ='Vendor No')
+    vendorName=fields.Char(string ='Vendor Name')
+    totalAcreage=fields.Float(string ='Total Acreage')
+    allocationToRoads=fields.Char(string ='Allocation To Roads/ Amenities')
+    usefulAcreage=fields.Float('Usefull Acreage')
+    createdBy=fields.Char(string ='Created By')
+    date=fields.Date(string ='Description',default = fields.Date.today)
+    plotNo=fields.Char(string ='Plot No')
+    plotDesc=fields.Char(string ='Plot Description')
+    posted=fields.Boolean(string ='Posted')
+   
+      #end project lines
+
+       #project land purchase cost
+class inv_project_puchase_cost(models.Model):
+    _name="project_purchase_cost"
+    _description="Project Cost"
+           
+    name=fields.Char(string ='Project No')
+    initialCost = fields.Float(string ='Initial Cost')
+    costPlusVat=fields.Float(string ='Cost+16VAT'),
+    totalCost=fields.Float(string ='Total Cost')
+    profitMargin=fields.Float(string ='Profit Margin')
+    totalMarginCost  =fields.Float(string ='Total Cost + Margin')
+    allocationNo  =fields.Char(string ='Allocation No')
+    description=fields.Char(string ='Description')
+    vat=fields.Float(string ='VAT 16%')
+    feeCharged=fields.Float(string ='Fee Charged')
+    attaractMargin=fields.Boolean(string ='Attract Margin')
+    nonLandCost=fields.Float(string ='Non Land Cost')
+    totalLandCost=fields.Float(string ='Total Land Cost')
+    vendorPrice=fields.Float(string ='Vendor Price')
+
+
+class member(models.Model):  
+    _name = 'investment_member'   
+    _description="investment Member"
+    
+    no = fields.Char(string = 'No.')#, readonly = True
+    name = fields.Char(string = 'Name')
+    address = fields.Char(string = 'Address')
+    phone_no = fields.Char(string = 'Phone No.')
+    mobile_no = fields.Char()
+    email = fields.Char(string = 'Email')
+    #customer_type = fields.Selection([('member',"Member"),('no_member',"Non Member")],string = 'Customer Type')
+    registration_date = fields.Date()    
+    
+    date_of_birth = fields.Date(string = 'Date of Birth')
+    home_address = fields.Char()
+    location = fields.Char()
+    sublocation = fields.Char()
+    district = fields.Char()    
+    
+    ###########################################################################
+    idno = fields.Char()
+    passportno = fields.Char()
+    marital_status = fields.Selection([('single','Single'),('married','Married')])
+    gender = fields.Selection([('male','Male'),('female','Female')])
+    monthly_contribution = fields.Float()
+    dividend_amount = fields.Float()
+    occupation = fields.Char()  
+    designation = fields.Char()
+    contact_person = fields.Char()
+    contact_person_phone_no = fields.Char()
+    contact_person_relation = fields.Selection([('kin','Kin'),('relative','Relative'),('friend','Friend')])
+    recruited_by = fields.Char()
+    approved_by = fields.Char()
+    bank_name = fields.Char()
+    bank_account_no = fields.Char()
+    member_pin = fields.Char()
+    #This marks the beginning of unique fields for member not in member appliaction
+    current_loan = fields.Float()#*
+    current_shares = fields.Float()#
+    total_repayment = fields.Float()#compute = '_compute_member_statistics'
+    principal_balance = fields.Float()#compute = '_compute_member_statistics'
+    principal_repayment = fields.Float()   
+    image = fields.Binary("Image",help = "Member Image")
+    
+    registration_fee_paid = fields.Float()
+    current_savings = fields.Float()#compute = '_compute_member_statistics'
+    current_deposits = fields.Float()#compute = '_compute_member_statistics'
+    next_of_kin_id_member = fields.One2many('next.of.kin','member_no')
+    member_account_status = fields.Selection([('active',"Active"),('suspended',"Suspended"),('closed',"Closed")], default = 'active')
+
+    #ledger_ids = fields.One2many('sacco.member.ledger.entry','member_no')
+    #
+"""
+class next_of_kin(models.Model):
+    _name = 'next.of.kin'
+
+    name = fields.Char()
+    relationship = fields.Selection([('kin',"Kin"),('relative',"Relative"),('friend',"Friend")])
+    beneficiary = fields.Boolean()
+    date_of_birth = fields.Date()
+    address = fields.Char()
+    telephone = fields.Char()
+    fax = fields.Char()
+    email = fields.Char()
+    
+    idno = fields.Char()
+    percentage_allocation = fields.Float()
+    creation_date = fields.Date()
+    member_no = fields.Char(string = 'Member ID')
+    #member_application_id = fields.Char(string = 'Member ID')
+
+"""
+class member_ledger(models.Model):
+    _name = 'investment.member.ledger.entry'
+
+    transaction_no = fields.Char()
+    transaction_type = fields.Selection([('deposits',"Member Deposits"),('withdrawal',"Deposit Withdrawal"),('shares',"Shares Contribution"),('loan',"Loan"),('savings',"Savings"),('interest',"Interest Payment")])
+    transaction_name = fields.Char()
+    member_no = fields.Char()#'sacco.member'
+    member_name = fields.Char()
+    date = fields.Date()
+    amount = fields.Float()
+    member_id = fields.Char()
+    debit = fields.Float()
+    credit = fields.Float()
+    entry_no = fields.Integer()
+
+#application card
+class inv_application_card(models.Model):
+    _name="application_card"
+    _description="Application Card"
+           
+    name=fields.Char(string ='Project No.')
+    staffNo=fields.Char(string ='Staff No')
+    clientCode=fields.Char(string ='Client Code')
+    clientName=fields.Char(string ='Client Name')
+    idno=fields.Char(string ='ID No')
+    appDate=fields.Date(string ='Application Date')
+    ptype=fields.Char(string ='Product Type')
+    desc=fields.Char(string ='Product Description')
+    installment=fields.Float(string ='Installment')
+    intrst=fields.Float(string ='Interest')
+    prodCurCode=fields.Char(string ='Product Currency Code')
+    reqAmount=fields.Float(string ='Requested Amount')
+    appAmount=fields.Float(string ='Approved Amount')
+    loanPurpose=fields.Char(string ='Loan Purpose')
+    remark=fields.Char(string ='Remarks')
+    repMode=fields.Char(string ='Repayment Mode')
+    repay=fields.Char(string ='Repayment')
+    prdStatus=fields.Selection([
+        ('open','Open'),
+        ('pending','Pending Approval'),
+        ('approved','Approved')], default = 'open')
+    batch=fields.Char(string ='Batch No')
+    captured=fields.Char(string ='Captured By')
+    topUpAmt=fields.Float(string ='Top Up Amount')
+    repFreq=fields.Float(string ='Repayment Frequency')
+    mode=fields.Char(string ='Mode of Disbursment')
+    prdDisDate=fields.Date(string ='Product Disbursment Date')
+    cheque=fields.Char(string ='Cheque No')
+    repStrtDate=fields.Date(string ='Repayment Start Date')
+    externalEft=fields.Char(string ='External EFT')
+    posted=fields.Boolean(string ='Posted')
+    rversed=fields.Boolean(string ='Reversed')
+    outstandingBal=fields.Float(string ='Outstanding Balance')
+
